@@ -20,17 +20,25 @@ function Form(props) {
   }
 
   const handleLastNameChange = (event) => {
-    setFirstName(event.target.value);
+    setLastName(event.target.value);
   }
 
   const handleEmailChange = (event) => {
-    setFirstName(event.target.value);
+    setEmail(event.target.value);
   }
 
   useEffect(() => {
     fetchServices(); 
     console.log(firstName)
   });
+
+  let serviceOptions = [];
+  if (services) {
+    serviceOptions = services.map( (service) =>
+      <option key={service.id}>{service.display_name}</option>
+    );
+  }
+
 
   return(
     <div>
@@ -40,6 +48,9 @@ function Form(props) {
         <input type="text" value={firstName} onChange={handleFirstNameChange} /><br></br>
         <input type="text" value={lastName} onChange={handleLastNameChange} /><br></br>
         <input type="text" value={email} onChange={handleEmailChange} /><br></br>
+        <select>
+          {serviceOptions}
+        </select>
       </form>
     </div>
   );
