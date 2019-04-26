@@ -34,10 +34,12 @@ function Form(props) {
 
   return(
     <div>
+      <h1>New Assistance Request</h1>
+      <hr></hr>
       <form>
-        <input type="text" value={firstName} onChange={handleFirstNameChange} />
-        <input type="text" value={lastName} onChange={handleLastNameChange} />
-        <input type="text" value={email} onChange={handleEmailChange} />
+        <input type="text" value={firstName} onChange={handleFirstNameChange} /><br></br>
+        <input type="text" value={lastName} onChange={handleLastNameChange} /><br></br>
+        <input type="text" value={email} onChange={handleEmailChange} /><br></br>
       </form>
     </div>
   );
