@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react'
 
 function Form(props) {
 
+  // state
   const [services, setServices] = useState(null);
   const [firstName, setFirstName] = useState("First Name");
   const [lastName, setLastName] = useState("Last Name");
   const [email, setEmail] = useState("Email");
+  const [comments, setComments] = useState("");
 
+  // lifecycle methods
+  useEffect(() => {
+    fetchServices(); 
+  });
+
+  // fetch select values
   const fetchServices = () => {
     if (services === null) {
       fetch('http://localhost:49567/api/service-types')
@@ -15,6 +23,7 @@ function Form(props) {
     }
   }
   
+  // click handlers
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
   }
@@ -27,18 +36,22 @@ function Form(props) {
     setEmail(event.target.value);
   }
 
-  useEffect(() => {
-    fetchServices(); 
-    console.log(firstName)
-  });
-
-  let serviceOptions = [];
-  if (services) {
-    serviceOptions = services.map( (service) =>
-      <option key={service.id}>{service.display_name}</option>
-    );
+  const handleCommentsChange = (event) => {
+    setComments(event.target.value);
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  }
+
+  // create select options
+  let serviceOptions = [<option key="DEFAULT" value="DEFAULT" disabled>Select Service Type</option>];
+  if (services) {
+    let dynamicOptions = services.map( (service) =>
+      <option key={service.id}>{service.display_name}</option>
+    )
+    serviceOptions = [...serviceOptions, ...dynamicOptions];
+  }
 
   return(
     <div>
@@ -48,9 +61,11 @@ function Form(props) {
         <input type="text" value={firstName} onChange={handleFirstNameChange} /><br></br>
         <input type="text" value={lastName} onChange={handleLastNameChange} /><br></br>
         <input type="text" value={email} onChange={handleEmailChange} /><br></br>
-        <select>
+        <select defaultValue="DEFAULT">
           {serviceOptions}
-        </select>
+        </select><br></br>
+        <input type="textarea" value={comments} onChange={handleCommentsChange} /><br></br>
+        <input type="submit" onClick={handleSubmit} value="Get Assistance"/>
       </form>
     </div>
   );
