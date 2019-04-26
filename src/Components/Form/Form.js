@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react'
 function Form(props) {
 
   const [services, setServices] = useState(null);
+  const [firstName, setFirstName] = useState("First Name");
+  const [lastName, setLastName] = useState("Last Name");
+  const [email, setEmail] = useState("Email");
 
   const fetchServices = () => {
     if (services === null) {
@@ -11,16 +14,31 @@ function Form(props) {
         .then(json => setServices(json.data))
     }
   }
+  
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
+  }
+
+  const handleLastNameChange = (event) => {
+    setFirstName(event.target.value);
+  }
+
+  const handleEmailChange = (event) => {
+    setFirstName(event.target.value);
+  }
 
   useEffect(() => {
     fetchServices(); 
+    console.log(firstName)
   });
-
-  console.log(services)
 
   return(
     <div>
-      hi
+      <form>
+        <input type="text" value={firstName} onChange={handleFirstNameChange} />
+        <input type="text" value={lastName} onChange={handleLastNameChange} />
+        <input type="text" value={email} onChange={handleEmailChange} />
+      </form>
     </div>
   );
 }
