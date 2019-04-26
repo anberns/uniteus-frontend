@@ -1,3 +1,12 @@
+/*
+  to do:
+  -form validation
+  -echo post data on 201
+  -checkbox uncheck
+  -style
+  -refactor
+  -test
+*/
 import React, { useState, useEffect } from 'react'
 
 function Form(props) {
@@ -8,7 +17,7 @@ function Form(props) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [service, setService] = useState();
-  const [comments, setComments] = useState("");
+  const [description, setDescription] = useState("");
   const [accept, setAccept] = useState(false);
 
 
@@ -42,7 +51,7 @@ function Form(props) {
         setService(event.target.value); 
         break;
       case "desc":
-        setComments(event.target.value); 
+        setDescription(event.target.value); 
         break;
       case "check":
         setAccept(event.target.value);
@@ -52,6 +61,7 @@ function Form(props) {
     }
   }
 
+  // post form data
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch('http://localhost:49567/api/assistance-requests', {
@@ -67,19 +77,23 @@ function Form(props) {
             "email": email,
           },
           "service_type": service,
-          "description": comments
+          "description": description 
           }
       })
     })
-      .then(response => {
-        handleResponse(response.status)
-      })
+    .then(response => {
+      handleResponse(response.status)
+    })
   }
 
+  // display server response
   const handleResponse = (status) => {
     let messageDiv = document.getElementById("response-message")
+
+    // hide form
     let form = document.getElementById("form-div")
     form.style.display = "none"
+
     switch (status) {
       case 201:
         messageDiv.innerHTML = "Your assistance request has been successfully submitted."
@@ -120,7 +134,7 @@ function Form(props) {
           <select className="form-control" value={service} name="service" onChange={handleChange}>
             {serviceOptions}
           </select><br></br>
-          <input className="form-control" type="textarea" name="desc" value={comments} onChange={handleChange} /><br></br>
+          <input className="form-control" type="textarea" name="desc" value={description} onChange={handleChange} /><br></br>
           <input type="checkbox" checked={accept} name="check" onChange={handleChange}/>
           <label>I hereby accept the terms of service for THE NETWORK and the Privacy Policy.</label><br></br>
           <input className="btn btn-primary btn-sm" type="submit" value="Get Assistance"/>
