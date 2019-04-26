@@ -27,29 +27,29 @@ function Form(props) {
   }
   
   // click handlers
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  }
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  }
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  }
-
-
-  const handleServiceChange = (event) => {
-    setService(event.target.value);
-  }
-
-  const handleCommentsChange = (event) => {
-    setComments(event.target.value);
-  }
-
-  const handleAcceptChange = (event) => {
-    setAccept(event.target.value);
+  const handleChange = (event) => {
+    switch (event.target.name) {
+      case "fname":
+        setFirstName(event.target.value);
+        break;
+      case "lname":
+        setLastName(event.target.value);     
+        break;
+      case "email":
+        setEmail(event.target.value);
+        break;
+      case "service":
+        setService(event.target.value); 
+        break;
+      case "desc":
+        setComments(event.target.value); 
+        break;
+      case "check":
+        setAccept(event.target.value);
+        break;
+      default:
+        break;
+    }
   }
 
   const handleSubmit = (event) => {
@@ -114,14 +114,14 @@ function Form(props) {
         <h1>New Assistance Request</h1>
         <hr></hr>
         <form id="request-form" className="needs-validation" onSubmit={handleSubmit} noValidate>
-          <input className="form-control" required type="text" value={firstName} onChange={handleFirstNameChange} placeholder="First Name"/><br></br>
-          <input className="form-control" required type="text" value={lastName} onChange={handleLastNameChange} placeholder="Last Name"/><br></br>
-          <input className="form-control" required type="text" value={email} onChange={handleEmailChange} placeholder="Email"/><br></br>
-          <select className="form-control" value={service} onChange={handleServiceChange}>
+          <input className="form-control" required type="text" name="fname" value={firstName} onChange={handleChange} placeholder="First Name"/><br></br>
+          <input className="form-control" required type="text" name="lname" value={lastName} onChange={handleChange} placeholder="Last Name"/><br></br>
+          <input className="form-control" required type="text" name="email" value={email} onChange={handleChange} placeholder="Email"/><br></br>
+          <select className="form-control" value={service} name="service" onChange={handleChange}>
             {serviceOptions}
           </select><br></br>
-          <input className="form-control" type="textarea" value={comments} onChange={handleCommentsChange} /><br></br>
-          <input type="checkbox" checked={accept} onChange={handleAcceptChange}/>
+          <input className="form-control" type="textarea" name="desc" value={comments} onChange={handleChange} /><br></br>
+          <input type="checkbox" checked={accept} name="check" onChange={handleChange}/>
           <label>I hereby accept the terms of service for THE NETWORK and the Privacy Policy.</label><br></br>
           <input className="btn btn-primary btn-sm" type="submit" value="Get Assistance"/>
         </form>
