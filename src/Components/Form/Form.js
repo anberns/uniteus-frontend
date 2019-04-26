@@ -9,6 +9,8 @@ function Form(props) {
   const [email, setEmail] = useState("Email");
   const [service, setService] = useState("");
   const [comments, setComments] = useState("");
+  const [accept, setAccept] = useState(false);
+
 
   // lifecycle methods
   useEffect(() => {
@@ -37,12 +39,17 @@ function Form(props) {
     setEmail(event.target.value);
   }
 
+
+  const handleServiceChange = (event) => {
+    setService(event.target.value);
+  }
+
   const handleCommentsChange = (event) => {
     setComments(event.target.value);
   }
 
-  const handleServiceChange = (event) => {
-    setService(event.target.value);
+  const handleAcceptChange = (event) => {
+    setAccept(event.target.value);
   }
 
   const handleSubmit = (event) => {
@@ -70,6 +77,8 @@ function Form(props) {
           {serviceOptions}
         </select><br></br>
         <input type="textarea" value={comments} onChange={handleCommentsChange} /><br></br>
+        <input type="checkbox" checked={accept} onChange={handleAcceptChange}/>
+        <label>I hereby accept the terms of service for THE NETWORK and the Privacy Policy.</label><br></br>
         <input type="submit" value="Get Assistance"/>
       </form>
     </div>
