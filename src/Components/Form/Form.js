@@ -7,6 +7,7 @@ function Form(props) {
   const [firstName, setFirstName] = useState("First Name");
   const [lastName, setLastName] = useState("Last Name");
   const [email, setEmail] = useState("Email");
+  const [service, setService] = useState("");
   const [comments, setComments] = useState("");
 
   // lifecycle methods
@@ -40,12 +41,16 @@ function Form(props) {
     setComments(event.target.value);
   }
 
+  const handleServiceChange = (event) => {
+    setService(event.target.value);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
   }
 
   // create select options
-  let serviceOptions = [<option key="DEFAULT" value="DEFAULT" disabled>Select Service Type</option>];
+  let serviceOptions = [<option key="DEFAULT" >Select Service Type</option>];
   if (services) {
     let dynamicOptions = services.map( (service) =>
       <option key={service.id}>{service.display_name}</option>
@@ -57,15 +62,15 @@ function Form(props) {
     <div>
       <h1>New Assistance Request</h1>
       <hr></hr>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input type="text" value={firstName} onChange={handleFirstNameChange} /><br></br>
         <input type="text" value={lastName} onChange={handleLastNameChange} /><br></br>
         <input type="text" value={email} onChange={handleEmailChange} /><br></br>
-        <select defaultValue="DEFAULT">
+        <select value={service} onChange={handleServiceChange}>
           {serviceOptions}
         </select><br></br>
         <input type="textarea" value={comments} onChange={handleCommentsChange} /><br></br>
-        <input type="submit" onClick={handleSubmit} value="Get Assistance"/>
+        <input type="submit" value="Get Assistance"/>
       </form>
     </div>
   );
