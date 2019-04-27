@@ -1,9 +1,7 @@
 /*
   to do:
-  -form validation
   -echo post data on 201
   -checkbox uncheck
-  -style
   -refactor
   -test
 */
@@ -55,7 +53,7 @@ function Form(props) {
         setDescription(event.target.value); 
         break;
       case "check":
-        setAccept(event.target.value);
+        event.target.checked ? setAccept(true) : setAccept(false) 
         break;
       default:
         break;
