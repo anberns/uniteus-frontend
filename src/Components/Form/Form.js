@@ -5,6 +5,7 @@
   -test
 */
 import React, { useState, useEffect } from 'react'
+import TextInput from '../TextInput/TextInput';
 import './Form.css';
 
 function Form(props) {
@@ -181,8 +182,17 @@ function Form(props) {
         <h1>{props.title}</h1>
         <hr></hr>
         <form id="request-form" className="needs-validation" onSubmit={handleSubmit} noValidate>
-          <input className="form-control" required type="text" name="fname" value={firstName} onChange={handleChange} placeholder="First Name"/>
-          <div className="val-div" id="fname-val">required</div>
+          <TextInput 
+            inputClass="form-control"  
+            inputId="fname"
+            inputName="fname" 
+            inputValue={firstName} 
+            onchange={handleChange} 
+            placeholder="First Name"
+            valId="fname-val"
+            valClass="val-div"
+          />
+
           <input className="form-control" required type="text" name="lname" value={lastName} onChange={handleChange} placeholder="Last Name"/>
           <div className="val-div" id="lname-val">required</div>
           <input className="form-control" required type="text" name="email" value={email} onChange={handleChange} placeholder="Email"/>
