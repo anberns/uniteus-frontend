@@ -91,7 +91,9 @@ function Form(props) {
 
   const validateField = (field, invalidValue, valId) => {
     if (field === invalidValue) {
-      document.getElementById(valId).style.visibility = "visible";
+      let element = document.getElementById(valId);
+      element.style.visibility = "visible";
+      element.innerHTML = "required";
       return false;
     }
     return true;
@@ -106,40 +108,28 @@ function Form(props) {
     }
     let allValid = true;
 
-    // firstName
     if (!validateField(firstName, "", "fname-val")) {
       allValid = false;
     }
-
-    // lastName
-    let lastNameMessageDiv = document.getElementById("lname-val");
-    if (lastName === "") {
-      lastNameMessageDiv.style.visibility = "visible";
+    if (!validateField(lastName, "", "lname-val")) {
       allValid = false;
     }
-    // email
-    let emailMessageDiv = document.getElementById("email-val");
-    if (email === "") {
-      emailMessageDiv.innerHTML = "required";
-      emailMessageDiv.style.visibility = "visible";
+    if (!validateField(service, undefined, "service-val")) {
       allValid = false;
-    } else if (!emailIsValid(email)) {
-      emailMessageDiv.innerHTML = "invalid email address";
-      emailMessageDiv.style.visibility = "visible";
+    } 
+    if (!validateField(accept, false, "check-val")) {
       allValid = false;
-    }
-    // service
-    let serviceMessageDiv = document.getElementById("service-val");
-    if (service === undefined){
-      serviceMessageDiv.style.visibility = "visible";
+    } 
+    if (validateField(email, "", "email-val")) {
+      if (!emailIsValid(email)) {
+        let emailMessageDiv = document.getElementById("email-val");
+        emailMessageDiv.innerHTML = "invalid email address";
+        emailMessageDiv.style.visibility = "visible";
+        allValid = false;
+      }
+    } else {
       allValid = false;
-    }
-    // checkbox 
-    let checkMessageDiv = document.getElementById("check-val");
-    if (accept === false) {
-      checkMessageDiv.style.visibility = "visible";
-      allValid = false;
-    }
+    }     
     return allValid;
   }
 
