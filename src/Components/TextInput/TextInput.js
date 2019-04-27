@@ -7,7 +7,7 @@ function TextInput(props) {
       <input 
         className={props.inputClass} 
         required 
-        type="text" 
+        type={props.type} 
         id={props.inputId}
         name={props.inputName} 
         value={props.inputValue} 

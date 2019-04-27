@@ -191,12 +191,30 @@ function Form(props) {
             placeholder="First Name"
             valId="fname-val"
             valClass="val-div"
+            type="text"
           />
-
-          <input className="form-control" required type="text" name="lname" value={lastName} onChange={handleChange} placeholder="Last Name"/>
-          <div className="val-div" id="lname-val">required</div>
-          <input className="form-control" required type="text" name="email" value={email} onChange={handleChange} placeholder="Email"/>
-          <div className="val-div" id="email-val">required</div>
+          <TextInput 
+            inputClass="form-control"  
+            inputId="lname"
+            inputName="lname" 
+            inputValue={lastName} 
+            onchange={handleChange} 
+            placeholder="Last Name"
+            valId="lname-val"
+            valClass="val-div"
+            type="text"
+          />
+          <TextInput 
+            inputClass="form-control"  
+            inputId="email"
+            inputName="email" 
+            inputValue={email} 
+            onchange={handleChange} 
+            placeholder="Email"
+            valId="email-val"
+            valClass="val-div"
+            type="email"
+          />
           <select className="form-control" value={service} name="service" onChange={handleChange}>
             {serviceOptions}
           </select>
