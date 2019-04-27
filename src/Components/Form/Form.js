@@ -89,6 +89,14 @@ function Form(props) {
     }
   }
 
+  const validateField = (field, invalidValue, valId) => {
+    if (field === invalidValue) {
+      document.getElementById(valId).style.visibility = "visible";
+      return false;
+    }
+    return true;
+  }
+
   const validateFields = () => {
 
     // reset visibility of validation message divs
@@ -99,11 +107,10 @@ function Form(props) {
     let allValid = true;
 
     // firstName
-    let firstNameMessageDiv = document.getElementById("fname-val");
-    if (firstName === "") {
-      firstNameMessageDiv.style.visibility = "visible";
+    if (!validateField(firstName, "", "fname-val")) {
       allValid = false;
     }
+
     // lastName
     let lastNameMessageDiv = document.getElementById("lname-val");
     if (lastName === "") {
