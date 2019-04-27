@@ -1,5 +1,20 @@
+.container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#form-div {
+  width: 550px;
+  display: inline-block;
+  text-align: left;
+}
+
 .val-div {
   visibility: hidden;
   color: red;
+  text-align: right;
+}
+
+.right {
   text-align: right;
 }

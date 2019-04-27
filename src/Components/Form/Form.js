@@ -189,9 +189,11 @@ function Form(props) {
           <div className="val-div" id="service-val">required</div>
           <input className="form-control" type="textarea" name="desc" value={description} onChange={handleChange} /><br></br>
           <input type="checkbox" checked={accept} name="check" onChange={handleChange}/>
-          <label>I hereby accept the terms of service for THE NETWORK and the Privacy Policy.</label><br></br>
+          <span> I hereby accept the terms of service for THE NETWORK and the Privacy Policy.</span><br></br>
           <div className="val-div" id="check-val">required</div>
-          <input className="btn btn-primary btn-sm" type="submit" value="Get Assistance"/>
+          <div className="right">
+            <input className="btn btn-primary btn-sm" type="submit" value="Get Assistance"/>
+          </div>
         </form>
       </div>
     </div>
