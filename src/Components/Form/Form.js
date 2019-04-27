@@ -121,9 +121,15 @@ function Form(props) {
     // email
     let emailMessageDiv = document.getElementById("email-val");
     if (email === "") {
+      emailMessageDiv.innerHTML = "required";
+      emailMessageDiv.style.visibility = "visible";
+      allValid = false;
+    } else if (!emailIsValid(email)) {
+      emailMessageDiv.innerHTML = "invalid email address";
       emailMessageDiv.style.visibility = "visible";
       allValid = false;
     }
+
     // service
     let serviceMessageDiv = document.getElementById("service-val");
     if (service === undefined){
@@ -137,6 +143,11 @@ function Form(props) {
       allValid = false;
     }
     return allValid;
+  }
+
+  // from https://tylermcginnis.com/validate-email-address-javascript/
+  const emailIsValid = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 
   // display server response
@@ -182,20 +193,20 @@ function Form(props) {
         <h1>New Assistance Request</h1>
         <hr></hr>
         <form id="request-form" className="needs-validation" onSubmit={handleSubmit} noValidate>
-          <input className="form-control" required type="text" name="fname" value={firstName} onChange={handleChange} placeholder="First Name"/><br></br>
+          <input className="form-control" required type="text" name="fname" value={firstName} onChange={handleChange} placeholder="First Name"/>
           <div className="val-div" id="fname-val">required</div>
-          <input className="form-control" required type="text" name="lname" value={lastName} onChange={handleChange} placeholder="Last Name"/><br></br>
+          <input className="form-control" required type="text" name="lname" value={lastName} onChange={handleChange} placeholder="Last Name"/>
           <div className="val-div" id="lname-val">required</div>
-          <input className="form-control" required type="text" name="email" value={email} onChange={handleChange} placeholder="Email"/><br></br>
+          <input className="form-control" required type="text" name="email" value={email} onChange={handleChange} placeholder="Email"/>
           <div className="val-div" id="email-val">required</div>
           <select className="form-control" value={service} name="service" onChange={handleChange}>
             {serviceOptions}
-          </select><br></br>
+          </select>
           <div className="val-div" id="service-val">required</div>
-          <input className="form-control" type="textarea" name="desc" value={description} onChange={handleChange} /><br></br>
+          <input id="desc" className="form-control" type="textarea" name="desc" value={description} onChange={handleChange} /><br></br>
           <input type="checkbox" checked={accept} name="check" onChange={handleChange}/>
           <span> I hereby accept the terms of service for THE NETWORK and the Privacy Policy.</span><br></br>
-          <div className="val-div" id="check-val">required</div>
+          <div className="val-div left" id="check-val">Acceptance of terms required</div>
           <div className="right">
             <input className="btn btn-primary btn-sm" type="submit" value="Get Assistance"/>
           </div>

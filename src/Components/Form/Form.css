@@ -13,8 +13,17 @@
   visibility: hidden;
   color: red;
   text-align: right;
+  margin-bottom: 10px;
 }
 
 .right {
   text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+#desc {
+  height: 200px;
 }
