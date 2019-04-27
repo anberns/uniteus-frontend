@@ -18,7 +18,7 @@ function Form(props) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [service, setService] = useState();
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("none");
   const [accept, setAccept] = useState(false);
 
 
@@ -68,25 +68,27 @@ function Form(props) {
 
     // validate fields
     if (validateFields()) {
+      let data = {
+        "assistance_request": {
+          "contact": {
+            "first_name": firstName,
+            "last_name": lastName,
+            "email": email,
+          },
+          "service_type": service,
+          "description": description 
+          }
+      };
+
       fetch('http://localhost:49567/api/assistance-requests', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          "assistance_request": {
-            "contact": {
-              "first_name": firstName,
-              "last_name": lastName,
-              "email": email,
-            },
-            "service_type": service,
-            "description": description 
-            }
-        })
+        body: JSON.stringify(data)
       })
       .then(response => {
-        handleResponse(response.status)
+        handleResponse(response)
       })
     }
   }
@@ -121,7 +123,6 @@ function Form(props) {
     }
     // service
     let serviceMessageDiv = document.getElementById("service-val");
-    console.log(service)
     if (service === undefined){
       serviceMessageDiv.style.visibility = "visible";
       allValid = false;
@@ -136,14 +137,14 @@ function Form(props) {
   }
 
   // display server response
-  const handleResponse = (status) => {
+  const handleResponse = (response) => {
     let messageDiv = document.getElementById("response-message")
 
     // hide form
     let form = document.getElementById("form-div")
     form.style.display = "none"
 
-    switch (status) {
+    switch (response.status) {
       case 201:
         messageDiv.innerHTML = "Your assistance request has been successfully submitted."
         break;
@@ -157,6 +158,7 @@ function Form(props) {
         messageDiv.innerHTML = "We're down!!!!!! Come back later.....(please)"
         break;
       default:
+         messageDiv.innerHTML = response.statusText;
         break;
     }
   }
