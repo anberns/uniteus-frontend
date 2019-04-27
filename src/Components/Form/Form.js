@@ -18,7 +18,7 @@ function Form(props) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [service, setService] = useState();
-  const [description, setDescription] = useState("none");
+  const [description, setDescription] = useState("");
   const [accept, setAccept] = useState(false);
 
 
@@ -68,6 +68,7 @@ function Form(props) {
 
     // validate fields
     if (validateFields()) {
+
       let data = {
         "assistance_request": {
           "contact": {
@@ -76,9 +77,11 @@ function Form(props) {
             "email": email,
           },
           "service_type": service,
-          "description": description 
+          "description": description === "" ? "none" : description 
           }
       };
+      console.log(data)
+      
 
       fetch('http://localhost:49567/api/assistance-requests', {
         method: "POST",
