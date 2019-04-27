@@ -1,7 +1,6 @@
 /*
   to do:
   -echo post data on 201
-  -checkbox uncheck
   -refactor
   -test
 */
@@ -64,9 +63,8 @@ function Form(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // validate fields
+    // validate fields and POST
     if (validateFields()) {
-
       let data = {
         "assistance_request": {
           "contact": {
@@ -78,9 +76,6 @@ function Form(props) {
           "description": description === "" ? "none" : description 
           }
       };
-      console.log(data)
-      
-
       fetch('http://localhost:49567/api/assistance-requests', {
         method: "POST",
         headers: {
@@ -96,12 +91,11 @@ function Form(props) {
 
   const validateFields = () => {
 
-    // reset visibility
+    // reset visibility of validation message divs
     const valDivs = document.getElementsByClassName("val-div");
     for (const i of valDivs) {
       i.style.visibility = 'hidden';
     }
-
     let allValid = true;
 
     // firstName
@@ -127,7 +121,6 @@ function Form(props) {
       emailMessageDiv.style.visibility = "visible";
       allValid = false;
     }
-
     // service
     let serviceMessageDiv = document.getElementById("service-val");
     if (service === undefined){
@@ -143,7 +136,7 @@ function Form(props) {
     return allValid;
   }
 
-  // from https://tylermcginnis.com/validate-email-address-javascript/
+  // validate email, from https://tylermcginnis.com/validate-email-address-javascript/
   const emailIsValid = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
@@ -188,7 +181,7 @@ function Form(props) {
     <div className="container">
       <div id="response-message"></div>
       <div id="form-div">
-        <h1>New Assistance Request</h1>
+        <h1>{props.title}</h1>
         <hr></hr>
         <form id="request-form" className="needs-validation" onSubmit={handleSubmit} noValidate>
           <input className="form-control" required type="text" name="fname" value={firstName} onChange={handleChange} placeholder="First Name"/>

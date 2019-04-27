@@ -4,7 +4,7 @@ import Form from './Components/Form/Form';
 function App() {
   return (
     <div >
-      <Form />
+      <Form title="New Assistance Request"/>
       
     </div>
   );
