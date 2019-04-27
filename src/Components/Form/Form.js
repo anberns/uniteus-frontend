@@ -234,7 +234,7 @@ function Form(props) {
           <span> I hereby accept the terms of service for THE NETWORK and the Privacy Policy.</span><br></br>
           <div className="val-div left" id="check-val">Acceptance of terms required</div>
           <div className="right">
-            <input className="btn btn-primary btn-sm" type="submit" value="Get Assistance"/>
+            <input id="submitButton" className="btn btn-primary btn-sm" type="submit" value="Get Assistance"/>
           </div>
         </form>
       </div>
