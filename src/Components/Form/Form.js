@@ -219,7 +219,17 @@ function Form(props) {
             {serviceOptions}
           </select>
           <div className="val-div" id="service-val">required</div>
-          <input id="desc" className="form-control" type="textarea" name="desc" value={description} onChange={handleChange} /><br></br>
+          <TextInput 
+            inputClass="form-control"  
+            inputId="desc"
+            inputName="desc" 
+            inputValue={description} 
+            onchange={handleChange} 
+            placeholder=""
+            valId="email-val"
+            valClass="val-div"
+            type="textarea"
+          />
           <input type="checkbox" checked={accept} name="check" onChange={handleChange}/>
           <span> I hereby accept the terms of service for THE NETWORK and the Privacy Policy.</span><br></br>
           <div className="val-div left" id="check-val">Acceptance of terms required</div>
