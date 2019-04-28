@@ -10,19 +10,6 @@ describe('Form', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<Form />);
-    /*
-    wrapper.setProps({
-      inputClass: 'testClass',
-      type: 'text',
-      inputId: 'inputId',
-      inputName: 'inputName',
-      inputValue: 'inputValue',
-      onchange: testFn,
-      placeholder: 'placeholder',
-      valClass: 'valClass',
-      valId: 'valId'
-    })
-    */
   })
   it('renders a field for a first name', () => {
     expect(wrapper.containsMatchingElement(<TextInput inputId="fname" type="text"/>)).toEqual(true);
@@ -37,7 +24,7 @@ describe('Form', () => {
     expect(wrapper.find('select')).toHaveLength(1);
   });
   it('renders a textarea for a description', () => {
-    expect(wrapper.containsMatchingElement(<TextInput type="textarea"/>)).toEqual(true);
+    expect(wrapper.containsMatchingElement(<textarea />)).toEqual(true);
   });
   it('renders a checkbox for terms acknowledgement', () => {
     expect(wrapper.containsMatchingElement(<input type="checkbox"/>)).toEqual(true);

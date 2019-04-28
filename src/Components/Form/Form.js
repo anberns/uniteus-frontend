@@ -148,7 +148,7 @@ function Form(props) {
   }
 
   // create select options
-  let serviceOptions = [<option key="DEFAULT" >Select Service Type</option>];
+  let serviceOptions = [<option key="" disabled >Select Service Type</option>];
   if (services) {
     let dynamicOptions = services.map( (service) =>
       <option key={service.id}>{service.display_name}</option>
@@ -200,16 +200,12 @@ function Form(props) {
             {serviceOptions}
           </select>
           <div className="val-div" id="service-val">required</div>
-          <TextInput 
-            inputClass="form-control"  
-            inputId="desc"
-            inputName="desc" 
-            inputValue={description} 
-            onchange={handleChange} 
-            placeholder=""
-            valId="email-val"
-            valClass="val-div"
-            type="textarea"
+          <textarea 
+            className="form-control" 
+            id="desc" 
+            name="desc" 
+            value={description}
+            onChange={handleChange}
           />
           <input type="checkbox" checked={accept} name="check" onChange={handleChange}/>
           <span> I hereby accept the terms of service for THE NETWORK and the Privacy Policy.</span><br></br>
