@@ -141,27 +141,26 @@ function Form(props) {
 
   // display server response
   const handleResponse = (response) => {
-    let messageDiv = document.getElementById("response-message")
-
-    // hide form
-    let form = document.getElementById("form-div")
-    form.style.display = "none"
-
+    console.log(response)
     switch (response.status) {
       case 201:
-        messageDiv.innerHTML = "Your assistance request has been successfully submitted."
+        // hide form and display message
+        let form = document.getElementById("form-div")
+        form.style.display = "none"
+        let successDiv = document.getElementById("success-message")
+        successDiv.innerHTML = "Your assistance request has been successfully submitted."
         break;
       case 401:
-        messageDiv.innerHTML = "Sorry, you are not authorized to make this request."
+        alert("Sorry, you are not authorized to make this request.")
         break;
       case 500:
-        messageDiv.innerHTML = "Oh no! Something completely unexpected happened!"
+        alert("Oh no! Something completely unexpected happened!")
         break;
       case 503:
-        messageDiv.innerHTML = "We're down!!!!!! Come back later.....(please)"
+        alert("We're down!!!!!! Come back later.....(please)")
         break;
       default:
-         messageDiv.innerHTML = response.statusText;
+         alert(response.statusText);
         break;
     }
   }
@@ -177,7 +176,7 @@ function Form(props) {
 
   return(
     <div className="container">
-      <div id="response-message"></div>
+      <div id="success-message"></div>
       <div id="form-div">
         <h1>{props.title}</h1>
         <hr></hr>
