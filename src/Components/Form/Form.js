@@ -84,8 +84,16 @@ function Form(props) {
         },
         body: JSON.stringify(data)
       })
-      .then(response => {
-        handleResponse(response)
+      .then(response => response.json())
+      .then(json => {
+        if (json.echo) {
+          let form = document.getElementById("form-div")
+          form.style.display = "none"
+          let successDiv = document.getElementById("success-message")
+          successDiv.innerHTML = json.message; 
+        } else {
+          alert(json.message);
+        }
       })
     }
   }
@@ -137,32 +145,6 @@ function Form(props) {
   // validate email, from https://tylermcginnis.com/validate-email-address-javascript/
   const emailIsValid = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  }
-
-  // display server response
-  const handleResponse = (response) => {
-    console.log(response)
-    switch (response.status) {
-      case 201:
-        // hide form and display message
-        let form = document.getElementById("form-div")
-        form.style.display = "none"
-        let successDiv = document.getElementById("success-message")
-        successDiv.innerHTML = "Your assistance request has been successfully submitted."
-        break;
-      case 401:
-        alert("Sorry, you are not authorized to make this request.")
-        break;
-      case 500:
-        alert("Oh no! Something completely unexpected happened!")
-        break;
-      case 503:
-        alert("We're down!!!!!! Come back later.....(please)")
-        break;
-      default:
-         alert(response.statusText);
-        break;
-    }
   }
 
   // create select options
