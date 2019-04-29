@@ -1,9 +1,3 @@
-/*
-  to do:
-  -echo post data on 201
-  -refactor
-  -test
-*/
 import React, { useState, useEffect } from 'react'
 import TextInput from '../TextInput/TextInput';
 import './Form.css';
@@ -86,6 +80,8 @@ function Form(props) {
       })
       .then(response => response.json())
       .then(json => {
+
+        // check for successful response
         if (json.echo) {
           let form = document.getElementById("form-div")
           form.style.display = "none"
@@ -102,7 +98,6 @@ function Form(props) {
     if (field === invalidValue) {
       let element = document.getElementById(valId);
       element.style.visibility = "visible";
-      element.innerHTML = "required";
       return false;
     }
     return true;
@@ -110,11 +105,12 @@ function Form(props) {
 
   const validateFields = () => {
 
-    // reset visibility of validation message divs
+    // reset validation message divs
     const valDivs = document.getElementsByClassName("val-div");
     for (const i of valDivs) {
       i.style.visibility = 'hidden';
     }
+    document.getElementById("email-val").innerHTML = "required";
     let allValid = true;
 
     if (!validateField(firstName, "", "fname-val")) {

@@ -5,7 +5,6 @@ function App() {
   return (
     <div >
       <Form title="New Assistance Request"/>
-      
     </div>
   );
 }
